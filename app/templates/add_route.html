@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-4">Add Airport Route</h2>
+
+<form method="post" class="space-y-4">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Save Route
+    </button>
+</form>
+
+{% endblock %}

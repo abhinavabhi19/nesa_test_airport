@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-4">All Routes</h2>
+
+<p>
+    <a href="{% url 'add_airport' %}" class="text-blue-600">Add Airport</a> |
+    <a href="{% url 'add_route' %}" class="text-blue-600">Add Route</a> |
+    <a href="{% url 'nth_route' %}" class="text-blue-600">Find Nth</a> |
+</p>
+
+<table class="w-full border mt-4">
+    <thead class="bg-gray-200">
+        <tr>
+            <th class="p-2">Source</th>
+            <th class="p-2">Direction</th>
+            <th class="p-2">Destination</th>
+            <th class="p-2">Distance (km)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for r in routes %}
+        <tr class="border-t text-center">
+            <td class="p-2">{{ r.source.code }}</td>
+            <td class="p-2">{{ r.get_position_display }}</td>
+            <td class="p-2">{{ r.destination.code }}</td>
+            <td class="p-2">{{ r.distance_km }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="p-4 text-center">No routes available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3 class="text-xl mt-6">Airports (tree roots and nodes)</h3>
+<ul>
+    {% for airport in airports %}
+    <li>{{ airport.code }} {% if airport.name %}- {{ airport.name }}{% endif %}</li>
+    {% empty %}
+    <li>No airports set</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

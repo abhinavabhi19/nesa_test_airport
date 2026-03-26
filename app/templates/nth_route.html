@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Find Nth Left/Right Airport</h2>
+<form method="post" class="space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Find Nth</button>
+</form>
+
+{% if result %}
+<div class="mt-6 p-4 bg-green-100 rounded">
+    <p><strong>Start:</strong> {{ result.start }}</p>
+    <p><strong>Direction:</strong> {{ result.direction }}</p>
+    <p><strong>Step:</strong> {{ result.n }}</p>
+    {% if result.airport %}
+    <p><strong>Result Airport:</strong> {{ result.airport }}</p>
+    {% else %}
+    <p class="text-red-600">{{ result.message }}</p>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
